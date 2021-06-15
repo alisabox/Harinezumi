@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block main %}
+  <header class="page-header">
+    <nav class="navbar">
+      <a class="navbar__logo" href="/">
+        <img src="../static/img/hedgehog.svg" width=50 height=50 alt="Harenezumi logo">
+        <img src="../static/img/harenezumi_b.png" width=150 height=20 alt="Harenezumi">
+      </a>
+      <button class="navbar__toggler navbar__toggler--hide" aria-label="Toggle navigation"></button>
+      <div class="navbar__collapse">
+        <ul class="navbar__list">
+          <li class="navbar__item">
+            <a class="navbar__dropdown" href="/catalog">Show all products</a>
+            <button class="navbar__dropdown-button"></button>
+            <ul class="navbar__dropdown-menu" aria-labelledby="dropdown">
+              <li><a class="navbar__dropdown-item" href="/fruit">Fruits, Vegetables and Berries</a></li>
+              <li><a class="navbar__dropdown-item" href="/dairy">Dairy</a></li>
+              <li><a class="navbar__dropdown-item" href="/meat">Meat and fish</a></li>
+              <li><a class="navbar__dropdown-item" href="/cereals">Cereals</a></li>
+              <li><a class="navbar__dropdown-item" href="/drinks">Drinks</a></li>
+              <li><a class="navbar__dropdown-item" href="/bread">Bread and bakery</a></li>
+              <li><a class="navbar__dropdown-item" href="/snaks">Snacks</a></li>
+              <li><a class="navbar__dropdown-item" href="/ready">Ready-made food</a></li>
+              <li><a class="navbar__dropdown-item" href="/pet">Pet food</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <form class="navbar__search"  action="/search" method="get">
+        <input class="navbar__search-input" autocomplete="off" name="q" type="text" placeholder="Search" aria-label="Search">
+        <button type="submit" class="navbar__search-button"></button>
+        <ul class="navbar__search-output visually-hidden"></ul>
+      </form>
+      <div class="navbar__user">
+        <a class="navbar__user-cart" href="/cart">
+          <div>Cart</div>
+          <div class="navbar__user-cart-image">
+            <img src="../static/img/cart.svg" width="20" height="20" alt="">
+            {% if cart %}
+              <div class="navbar__user-cart-status">{{ cart }}</div>
+            {% endif %}
+          </div>
+        </a>
+        {% if session.user_id and status %}
+          <a class="navbar__user-login" href="/logout">
+            <div>Logout</div>
+            <img src="../static/img/user.svg" width="20" height="20" alt="">
+          </a>
+        {% else %}
+          <a class="navbar__user-login" href="/login">
+            <div>Login</div>
+            <img src="../static/img/user.svg" width="20" height="20" alt="">
+          </a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+  <main class="page-login">
+    <div class="page-login__wrapper">
+      <h1 class="page-login__title">Authorization</h1>
+      {% if get_flashed_messages() %}
+        <div class="">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+      {% endif %}
+      <form class="login__form" action="/register" method="post">
+        <label class="visually-hidden" for="email">Email</label>
+        <input class="login__input" id="email" name="email" type="email" placeholder="Email" autofocus autocomplete="off">
+        <label class="visually-hidden" for="password">Password</label>
+        <input class="login__input" id="password" name="password" type="password" placeholder="Password">
+        <label class="visually-hidden" for="confirmation">Password confirmation</label>
+        <input class="login__input" id="password" name="confirmation" type="password" placeholder="Confirmation">
+        <button class="login__register-button" type="submit" name="register">Register</button>
+      </form>
+      <p class="login__warning">Password must be between 6 to 20 characters long, have at least one number, one uppercase and one lowercase character and at least one special symbol.</p>
+    </div>
+  </main>
+{% endblock %}

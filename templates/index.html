@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+  <header class="page-header">
+    <nav class="navbar">
+      <a class="navbar__logo" href="/">
+        <img src="../static/img/hedgehog.svg" width=50 height=50 alt="Harinezumi logo">
+        <img src="../static/img/harinezumi.png" width=150 height=20 alt="Harinezumi">
+      </a>
+      <button class="navbar__toggler navbar__toggler--hide" aria-label="Toggle navigation"></button>
+      <div class="navbar__collapse">
+        <ul class="navbar__list">
+          <li class="navbar__item">
+            <a class="navbar__dropdown" href="/catalog">Show all products</a>
+            <button class="navbar__dropdown-button"></button>
+            <ul class="navbar__dropdown-menu" aria-labelledby="dropdown">
+              <li><a class="navbar__dropdown-item" href="/fruit">Fruits, Vegetables and Berries</a></li>
+              <li><a class="navbar__dropdown-item" href="/dairy">Dairy</a></li>
+              <li><a class="navbar__dropdown-item" href="/meat">Meat and fish</a></li>
+              <li><a class="navbar__dropdown-item" href="/cereals">Cereals</a></li>
+              <li><a class="navbar__dropdown-item" href="/drinks">Drinks</a></li>
+              <li><a class="navbar__dropdown-item" href="/bread">Bread and bakery</a></li>
+              <li><a class="navbar__dropdown-item" href="/snaks">Snacks</a></li>
+              <li><a class="navbar__dropdown-item" href="/ready">Ready-made food</a></li>
+              <li><a class="navbar__dropdown-item" href="/pet">Pet food</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <form class="navbar__search"  action="/search" method="get">
+        <input class="navbar__search-input" autocomplete="off" name="q" type="text" placeholder="Search" aria-label="Search">
+        <button type="submit" class="navbar__search-button"></button>
+        <ul class="navbar__search-output visually-hidden"></ul>
+      </form>
+      <div class="navbar__user">
+        <a class="navbar__user-cart" href="/cart">
+          <div>Cart</div>
+          <div class="navbar__user-cart-image">
+            <img src="../static/img/cart.svg" width="20" height="20" alt="">
+            {% if cart %}
+              <div class="navbar__user-cart-status">{{ cart }}</div>
+            {% endif %}
+          </div>
+        </a>
+        {% if session.user_id and status %}
+          <a class="navbar__user-login" href="/logout">
+            <div>Logout</div>
+            <img src="../static/img/user.svg" width="20" height="20" alt="">
+          </a>
+        {% else %}
+          <a class="navbar__user-login" href="/login">
+            <div>Login</div>
+            <img src="../static/img/user.svg" width="20" height="20" alt="">
+          </a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+  <main class="page-main">
+    <div class="page-main__wrapper">
+      <h1 class="visually-hidden">Harenezumi online shopping</h1>
+      <p class="page-main__slogan">
+        <b class="page-main__slogan-text">Harenezumi makes your shopping fun and easy!</b>
+      </p>
+      <section class="carousel">
+        <h2 class="visually-hidden">Harenezumi bundles</h2>
+        <ul class="carousel__list">
+          <li class="carousel__item carousel__item--1 carousel__item--current">
+            <img class="carousel__img" src="../static/img/pic1.jpg" width="721" height="300" alt="...">
+            <!-- Photo by <a href="https://unsplash.com/@lvnatikk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Lily Banse</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> -->
+            <div class="carousel__text"><a href="/meat">Tender meat for your summer table</a></div>
+          </li>
+          <li class="carousel__item carousel__item--2">
+            <img class="carousel__img" src="../static/img/pic2.jpg" width="100%" height="100%" alt="...">
+            <!-- Photo by <a href="https://unsplash.com/@brookelark?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Brooke Lark</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> -->
+            <div class="carousel__text"><a href="/fruit">All you need for a healthy breakfast</a></div>
+          </li>
+          <li class="carousel__item carousel__item--3">
+            <img class="carousel__img" src="../static/img/pic3.jpg" width="100%" height="100%" alt="...">
+            <!-- Photo by <a href="https://unsplash.com/@melanie_kreutz?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Melanie Kreutz</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> -->
+            <div class="carousel__text"><a href="/snaks">Sweets that you've been dreaming about</a></div>
+          </li>
+        </ul>
+        <button class="carousel__previous">
+          <img class="carousel__previous-icon" src="../static/img/previous.svg" width="30" height="30" alt="">
+        </button>
+        <button class="carousel__next">
+          <img class="carousel__next-icon" src="../static/img/next.svg" width="30" height="30" alt="">
+        </button>
+        <div class="carousel__slides">
+          <button class="carousel__slide carousel__slide--1"></button>
+          <button class="carousel__slide carousel__slide--2"></button>
+          <button class="carousel__slide carousel__slide--3"></button>
+        </div>
+      </section>
+      <section class="special-offers">
+        <h2 class="special-offers__header">Special offers of the week</h2>
+        <ul class="special-offers__list">
+          {% for item in featured %}
+            <li class="special-offers__item">
+              <a href="#">
+                <img class="special-offers__image" src="../static/img/catalog/{{ item[4] }}" width="260" height="150" alt="{{ item[2] }}">
+              </a>
+              <div class="special-offers__details">
+                <h3 class="special-offers__name"><a href="#">{{ item[2] }}</a></h3>
+                <p class="special-offers__price">{{ item[3] }} ¥</p>
+                <form class="special-offers__add-form" action="/" method="post">
+                  <button class="special-offers__add" type="submit" name="purchase" value="{{ item[0] }}">Add to cart</button>
+                </form>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+  </main>
+{% endblock %}
