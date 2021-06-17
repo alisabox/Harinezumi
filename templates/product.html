@@ -1,18 +1,19 @@
 {% extends "layout.html" %}
 
 {% block main %}
+
   <header class="page-header">
     <nav class="navbar">
       <a class="navbar__logo" href="/">
-        <img src="../static/img/hedgehog.svg" width=50 height=50 alt="Harenezumi logo">
-        <img src="../static/img/harinezumi.png" width=150 height=20 alt="Harenezumi">
+        <img src="../static/img/hedgehog.svg" width=50 height=50 alt="Harinezumi logo">
+        <img src="../static/img/harinezumi.png" width=150 height=20 alt="Harinezumi">
       </a>
       <button class="navbar__toggler navbar__toggler--hide" aria-label="Toggle navigation"></button>
       <div class="navbar__collapse">
         <ul class="navbar__list">
           <li class="navbar__item">
             <a class="navbar__dropdown" href="/catalog">Show all products</a>
-            <button class="navbar__dropdown-button"></button>
+            <button class="navbar__dropdown-button" aria-label="Open list of product categories"></button>
             <ul class="navbar__dropdown-menu" aria-labelledby="dropdown">
               <li><a class="navbar__dropdown-item" href="/fruit">Fruits, Vegetables and Berries</a></li>
               <li><a class="navbar__dropdown-item" href="/dairy">Dairy</a></li>
@@ -29,7 +30,7 @@
       </div>
       <form class="navbar__search"  action="/search" method="get">
         <input class="navbar__search-input" autocomplete="off" name="q" type="text" placeholder="Search" aria-label="Search">
-        <button type="submit" class="navbar__search-button"></button>
+        <button type="submit" class="navbar__search-button" aria-label="Search"></button>
         <ul class="navbar__search-output visually-hidden"></ul>
       </form>
       <div class="navbar__user">

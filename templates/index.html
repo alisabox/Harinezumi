@@ -13,8 +13,8 @@
         <ul class="navbar__list">
           <li class="navbar__item">
             <a class="navbar__dropdown" href="/catalog">Show all products</a>
-            <button class="navbar__dropdown-button"></button>
-            <ul class="navbar__dropdown-menu" aria-labelledby="dropdown">
+            <button class="navbar__dropdown-button" aria-label="Open list of product categories"></button>
+            <ul class="navbar__dropdown-menu">
               <li><a class="navbar__dropdown-item" href="/fruit">Fruits, Vegetables and Berries</a></li>
               <li><a class="navbar__dropdown-item" href="/dairy">Dairy</a></li>
               <li><a class="navbar__dropdown-item" href="/meat">Meat and fish</a></li>
@@ -30,7 +30,7 @@
       </div>
       <form class="navbar__search"  action="/search" method="get">
         <input class="navbar__search-input" autocomplete="off" name="q" type="text" placeholder="Search" aria-label="Search">
-        <button type="submit" class="navbar__search-button"></button>
+        <button type="submit" class="navbar__search-button" aria-label="Search"></button>
         <ul class="navbar__search-output visually-hidden"></ul>
       </form>
       <div class="navbar__user">
@@ -59,12 +59,12 @@
   </header>
   <main class="page-main">
     <div class="page-main__wrapper">
-      <h1 class="visually-hidden">Harenezumi online shopping</h1>
+      <h1 class="visually-hidden">Harinezumi online shopping</h1>
       <p class="page-main__slogan">
-        <b class="page-main__slogan-text">Harenezumi makes your shopping fun and easy!</b>
+        <b class="page-main__slogan-text">Harinezumi makes your shopping fun and easy!</b>
       </p>
       <section class="carousel">
-        <h2 class="visually-hidden">Harenezumi bundles</h2>
+        <h2 class="visually-hidden">Harinezumi bundles</h2>
         <ul class="carousel__list">
           <li class="carousel__item carousel__item--1 carousel__item--current">
             <img class="carousel__img" src="../static/img/pic1.jpg" width="721" height="300" alt="...">
@@ -72,26 +72,26 @@
             <div class="carousel__text"><a href="/meat">Tender meat for your summer table</a></div>
           </li>
           <li class="carousel__item carousel__item--2">
-            <img class="carousel__img" src="../static/img/pic2.jpg" width="100%" height="100%" alt="...">
+            <img class="carousel__img" src="../static/img/pic2.jpg" width="721" height="300" alt="...">
             <!-- Photo by <a href="https://unsplash.com/@brookelark?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Brooke Lark</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> -->
             <div class="carousel__text"><a href="/fruit">All you need for a healthy breakfast</a></div>
           </li>
           <li class="carousel__item carousel__item--3">
-            <img class="carousel__img" src="../static/img/pic3.jpg" width="100%" height="100%" alt="...">
+            <img class="carousel__img" src="../static/img/pic3.jpg" width="721" height="300" alt="...">
             <!-- Photo by <a href="https://unsplash.com/@melanie_kreutz?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Melanie Kreutz</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> -->
             <div class="carousel__text"><a href="/snaks">Sweets that you've been dreaming about</a></div>
           </li>
         </ul>
-        <button class="carousel__previous">
+        <button class="carousel__previous" aria-label="Previous offer">
           <img class="carousel__previous-icon" src="../static/img/previous.svg" width="30" height="30" alt="">
         </button>
-        <button class="carousel__next">
+        <button class="carousel__next" aria-label="Next offer">
           <img class="carousel__next-icon" src="../static/img/next.svg" width="30" height="30" alt="">
         </button>
         <div class="carousel__slides">
-          <button class="carousel__slide carousel__slide--1"></button>
-          <button class="carousel__slide carousel__slide--2"></button>
-          <button class="carousel__slide carousel__slide--3"></button>
+          <button class="carousel__slide carousel__slide--1" aria-label="First offer"></button>
+          <button class="carousel__slide carousel__slide--2" aria-label="Second offer"></button>
+          <button class="carousel__slide carousel__slide--3" aria-label="Third offer"></button>
         </div>
       </section>
       <section class="special-offers">
@@ -113,5 +113,6 @@
           {% endfor %}
         </ul>
       </section>
+    </div>
   </main>
 {% endblock %}

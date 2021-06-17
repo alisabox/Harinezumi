@@ -1,7 +1,6 @@
 import sqlite3
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask, flash, redirect, render_template, request, session, jsonify
-# from flask_session import Session
 
 # Open on python3 -m flask run
 
@@ -18,25 +17,6 @@ def after_request(response):
   response.headers["Expires"] = 0
   response.headers["Pragma"] = "no-cache"
   return response
-
-# def login_required(f):
-#   # Decorate routes to require login.
-#   # https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/
-
-#   @wraps(f)
-#   def decorated_function(*args, **kwargs):
-#     con = sqlite3.connect(DATABASE)
-#     db = con.cursor()
-#     users = db.execute("SELECT * FROM users WHERE id = ?", (session.get("user_id"),))
-#     user = []
-#     for i in users:
-#       user.append(i)
-#     if session.get("user_id") is None:
-#       return redirect("/login")
-#     elif user[0][3] == 'guest':
-#       return redirect("/login")
-#     return f(*args, **kwargs)
-#   return decorated_function
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -217,7 +197,17 @@ def register():
     user = []
     for row in rows:
       user.append(row)
+
+    # Check for active guest sessions
+    if session.get("user_id"):
+      db.execute("UPDATE cart SET user_id = REPLACE(user_id, ?, ?)", (session.get("user_id"), user[0][0],))
+      con.commit()
+      db.execute("DELETE FROM users WHERE id = ? AND user_type = 'guest'", (session.get("user_id"),))
+      con.commit()
+
+    # Remember which user has logged in
     session["user_id"] = user[0][0]
+    
     flash("You are registered!")
     return render_template("register.html", cart=cart)
 
