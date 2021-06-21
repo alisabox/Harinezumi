@@ -1042,3 +1042,9 @@
   left: -15px;
   content: "\2718";
 }
+
+.login__show-password {
+  text-align: left;
+  color: var(--grey-text);
+  font-size: 14px;
+}

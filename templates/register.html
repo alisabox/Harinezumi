@@ -73,23 +73,28 @@
           <label class="visually-hidden" for="password">Password</label>
           <input class="login__input " id="password" name="password" type="password" placeholder="Password" required minlength="6" maxlength="20"
           title="Must contain at least one number and one uppercase and lowercase letter, and at least one special symbol($@#!)">
-          <div class="message message--login">
-            <h3><i>Make sure the password contains the following:</i></h3>
-            <p class="message__letter message__invalid"><i>A <b>lowercase</b> letter</i></p>
-            <p class="message__capital message__invalid"><i>A <b>capital (uppercase)</b> letter</i></p>
-            <p class="message__number message__invalid"><i>A <b>number</b></i></p>
-            <p class="message__special message__invalid"><i>A <b>special character</b> ($@#!)</i></p>
-            <p class="message__length message__invalid"><i>Be between <b>6 and 20 characters</b> long</i></p>
-          </div>
+
         </div>
         <div class="login__form-element">
           <label class="visually-hidden" for="confirmation">Password confirmation</label>
-          <input class="login__input" id="confirmation" name="confirmation" type="password" placeholder="Confirmation" required minlength="6" maxlength="20">
-          <div class="message message--confirmation">
-            <p class="message__confirmed message__invalid"></i>Passwords have to match</i></p>
-          </div>
+          <input class="login__input" id="confirmation" name="confirmation" type="password" placeholder="Password confirmation" required minlength="6" maxlength="20">
+        </div>
+        <div class="login__show-password">
+          <input class="login__show-password__input" type="checkbox" id="show-password" name="show-password">
+          <label for="show-password" class="login__show-password__label">Show password</label>
         </div>
         <button class="login__register-button" type="submit" name="register">Register</button>
+        <div class="message message--login">
+          <h3><i>Make sure the password contains the following:</i></h3>
+          <p class="message__letter message__invalid"><i>A <b>lowercase</b> letter</i></p>
+          <p class="message__capital message__invalid"><i>A <b>capital (uppercase)</b> letter</i></p>
+          <p class="message__number message__invalid"><i>A <b>number</b></i></p>
+          <p class="message__special message__invalid"><i>A <b>special character</b> ($@#!)</i></p>
+          <p class="message__length message__invalid"><i>Is between <b>6 and 20 characters</b> long</i></p>
+        </div>
+        <div class="message message--confirmation">
+          <p class="message__confirmed message__invalid"><i>Passwords have to match</i></p>
+        </div>
       </form>
     </div>
   </main>

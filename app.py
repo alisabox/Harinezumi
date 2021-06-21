@@ -90,12 +90,12 @@ def login():
     # Ensure username was submitted
     if not request.form.get("email"):
       message = "Invalid email or/and password"
-      return render_template("login.html", message=message, cart=cart)
+      return render_template("login.html", message=message, cart=cart, login=True)
 
     # Ensure password was submitted
     elif not request.form.get("password"):
       message = "Invalid email or/and password"
-      return render_template("login.html", message=message, cart=cart)
+      return render_template("login.html", message=message, cart=cart, login=True)
 
     # Query database for username
     rows = db.execute("SELECT * FROM users WHERE username = ?", (request.form.get("email"),))
@@ -106,7 +106,7 @@ def login():
     # Ensure username exists and password is correct
     if len(user) != 1 or not check_password_hash(user[0][2], request.form.get("password")):
       message = "Invalid email or/and password"
-      return render_template("login.html", message=message, cart=cart)
+      return render_template("login.html", message=message, cart=cart, login=True)
 
     # Check for active guest sessions
     if session.get("user_id"):
@@ -130,7 +130,7 @@ def login():
         status.append(i)
       if status[0][0] == 'guest':
         return render_template("login.html", cart=cart)
-    return render_template("login.html", status=True, cart=cart)
+    return render_template("login.html", status=True, cart=cart, login=True)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -209,7 +209,7 @@ def register():
     session["user_id"] = user[0][0]
 
     flash("You are registered!")
-    return render_template("register.html", cart=cart, register=True)
+    return render_template("register.html", cart=cart, status=True, register=True)
 
   # User reached route via GET (as by clicking a link or via redirect)
   else:
