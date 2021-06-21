@@ -54,7 +54,7 @@ def index():
       cart.append(row)
     cart = cart[0][0]
     featured = db.execute("SELECT * FROM catalog WHERE featured = 1")
-    return render_template("index.html", featured=featured, cart=cart)
+    return render_template("index.html", featured=featured, cart=cart, index=True)
   else:
     cartData = db.execute("SELECT SUM(quantity) FROM cart WHERE user_id = ?", (session.get("user_id"),))
     cart = []
@@ -71,7 +71,7 @@ def index():
         return render_template("index.html", featured=featured, cart=cart)
 
     featured = db.execute("SELECT * FROM catalog WHERE featured = 1")
-    return render_template("index.html", featured=featured, status=True, cart=cart)
+    return render_template("index.html", featured=featured, status=True, cart=cart, index=True)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -149,13 +149,13 @@ def register():
     username = request.form.get("email")
     if not username:
       flash("Invalid email or/and password")
-      return render_template("register.html", cart=cart)
+      return render_template("register.html", cart=cart, register=True)
 
     # Ensure password was submitted
     password = request.form.get("password")
     if not password:
       flash("Invalid email or/and password")
-      return render_template("register.html", cart=cart)
+      return render_template("register.html", cart=cart, register=True)
 
     # Conditions for a valid password:
       # Should have at least one number.
@@ -165,28 +165,28 @@ def register():
     SpecialSym = ['$', '@', '#', '%', '!']
     if len(password) < 6:
       flash("Password length should be at least 6 characters")
-      return render_template("register.html", cart=cart)
+      return render_template("register.html", cart=cart, register=True)
     if len(password) > 20:
       flash("Password length should be at not longer than 20 characters")
-      return render_template("register.html", cart=cart)
+      return render_template("register.html", cart=cart, register=True)
     if not any(char.isdigit() for char in password):
       flash("Password should have at least one numeral")
-      return render_template("register.html", cart=cart)
+      return render_template("register.html", cart=cart, register=True)
     if not any(char.isupper() for char in password):
       flash("Password should have at least one uppercase letter")
-      return render_template("register.html", cart=cart)
+      return render_template("register.html", cart=cart, register=True)
     if not any(char.islower() for char in password):
       flash("Password should have at least one lowercase letter")
-      return render_template("register.html", cart=cart)
+      return render_template("register.html", cart=cart, register=True)
     if not any(char in SpecialSym for char in password):
       flash("Password should have at least one of the symbols $@#!")
-      return render_template("register.html", cart=cart)
+      return render_template("register.html", cart=cart, register=True)
 
     # Check the confirmation
     confirmation = request.form.get("confirmation")
     if confirmation != password:
       flash("Not matching passwords")
-      return render_template("register.html", cart=cart)
+      return render_template("register.html", cart=cart, register=True)
 
     hashed = generate_password_hash(password, method='pbkdf2:sha256', salt_length=8)
 
@@ -207,13 +207,13 @@ def register():
 
     # Remember which user has logged in
     session["user_id"] = user[0][0]
-    
+
     flash("You are registered!")
-    return render_template("register.html", cart=cart)
+    return render_template("register.html", cart=cart, register=True)
 
   # User reached route via GET (as by clicking a link or via redirect)
   else:
-    return render_template("register.html", cart=cart)
+    return render_template("register.html", cart=cart, register=True)
 
 @app.route("/logout")
 def logout():

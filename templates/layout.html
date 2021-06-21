@@ -41,5 +41,11 @@
     </footer>
     <script src="../static/scripts/jquery-3.6.0.min.js"></script>
     <script type="module" src="../static/scripts/main.js"></script>
+    {% if index %}
+      <script type="module" src="../static/scripts/carousel.js"></script>
+    {% endif %}
+    {% if register %}
+      <script type="module" src="../static/scripts/form.js"></script>
+    {% endif %}
   </body>
 </html>

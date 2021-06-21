@@ -115,4 +115,12 @@ const rotateSlides = () => {
   }
 }
 
-export {slideToFirst, slideToSecond, slideToThird, slideToNext, slideToPrevious, rotateSlides};
+slideToFirst;
+slideToSecond;
+slideToThird;
+slideToNext;
+slideToPrevious;
+
+
+const interval = setInterval(rotateSlides, 5000);
+interval;
