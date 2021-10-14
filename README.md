@@ -1,5 +1,5 @@
 # E-Commerce web-site "Harinezumi"
-#### Video Demo:  <https://www.youtube.com/watch?v=CIlSwBbL3Dg>
+
 #### Description:
 This is a web-site for daily grocery shopping that makes shopping experience fun and easy, especially when other closest stores are far from home or when you cannot leave your home for any reason.
 
